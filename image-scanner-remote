@@ -116,17 +116,11 @@ class RemoteScanner(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Scan Utility for Containers')
-    group = parser.add_mutually_exclusive_group(required=True)
-
-    group.add_argument('--images', help='search images', default=False,
+    images = subparser.add_parser('images', help='search images')
+    containers = subparser.add_parser('containers', help='search containers')
+    parser.add_argument('--all', help='search all images or containers', default=False,
                        action='store_true')
-    group.add_argument('--allimages', help='search all images', default=False,
-                       action='store_true')
-    group.add_argument('--onlyactive', help='search only active containers',
-                       default=False, action='store_true')
-    group.add_argument('--allcontainers', help='search all containers',
-                       default=False, action='store_true')
-    group.add_argument('-s', '--scan', help='image to search',
+    parser.add_argument('-s', '--scan', help='ID to search',
                        action='append')
     parser.add_argument('-n', '--number', help='number of processors to use',
                         type=int, default=0)
